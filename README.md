@@ -63,7 +63,7 @@ Siga estas etapas para configurar e executar o projeto completo.
 ### 1. Clonar o Repositório
 
 ```bash
-git clone <url-do-seu-repositorio>
+git clone https://github.com/patrickbatista42/n8n_automatization
 cd n8n_automatization
 ```
 
