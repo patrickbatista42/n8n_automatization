@@ -1,7 +1,0 @@
-{
-  "name": "installed-nodes",
-  "private": true,
-  "dependencies": {
-    "n8n-nodes-google-speech": "0.3.0"
-  }
-}
