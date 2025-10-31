@@ -2,7 +2,7 @@
 
 Este projeto implementa um sistema completo de agendamento médico, composto por uma API back-end robusta construída com FastAPI e um chatbot inteligente para atendimento ao cliente, orquestrado pelo n8n e potencializado pelo Google Gemini.
 
-O sistema permite que pacientes consultem horários disponíveis, agendem consultas, cancelem agendamentos e obtenham informações, tudo através de uma interface de chat. O back-end gerencia médicos, pacientes, horários (slots) e agendamentos, com uma camada de cache em Redis para otimização de performance.
+O sistema permite que pacientes consultem horários disponíveis, agendem consultas, cancelem agendamentos e obtenham informações, tudo através de uma interface de chat. O back-end gerencia médicos, pacientes, horários (slots) e agendamentos, com uma camada de cache em Redis para otimização de performance. Video de demonstração da ferramenta: https://drive.google.com/file/d/182u8rYXXVvoWoPBSpJyqxkaTV2iQXgaB/view
 
 ---
 
