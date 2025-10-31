@@ -2,39 +2,6 @@
   "name": "My workflow 2",
   "nodes": [
     {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "6a0a85f9-b226-4834-9b2d-9e6d54b85c9c",
-              "leftValue": "={{ $('When chat message received').item.json.files[0].fileType }}",
-              "rightValue": "audio",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        528,
-        -448
-      ],
-      "id": "0e0a4a11-1ce0-45d6-9e40-a18285e6fcd4",
-      "name": "If"
-    },
-    {
       "parameters": {},
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
@@ -47,65 +14,11 @@
     },
     {
       "parameters": {
-        "public": true,
-        "initialMessages": "Olá!\n\nSou um assistente de agendamento como posso te ajudar?",
-        "options": {
-          "allowedOrigins": "*",
-          "allowFileUploads": true,
-          "allowedFilesMimeTypes": "*",
-          "inputPlaceholder": "Faça consulta de horários, agende uma consulta ou cancele.",
-          "loadPreviousSession": "memory",
-          "showWelcomeScreen": false,
-          "customCss": "/* === THEME OVERRIDE: n8n Glass & Glow (Revised) === */\n\n/*\n  This theme is built upon the default n8n chat CSS variables.\n  We'll use your desired branding and layout, and then add\n  the \"glass\" effect using a semi-transparent background\n  and a backdrop-filter on the main window class.\n*/\n\n:root {\n  /* --- 1. CORE BRANDING & FONTS --- */\n  /* Your choices for font and primary color are applied here. */\n  --chat--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n  --chat--color-primary: #EA4B71; /* n8n Red */\n  --chat--color-primary-shade-50: #D93A60;\n  --chat--color-primary-shade-100: #C82A50;\n  --chat--color-secondary: #20b69e; /* Kept default secondary for things like file uploads */\n  --chat--color-secondary-shade-50: #1ca08a;\n  --chat--color-white: #ffffff;\n  --chat--color-light: #f2f4f8;\n  --chat--color-dark: #1F2937; /* Darker, more modern text color */\n  --chat--color-disabled: #9CA3AF;\n  --chat--color-typing: #404040;\n\n  /* --- 2. WINDOW & LAYOUT --- */\n  /* Your dimensions and rounded corners. The actual glass effect is handled in the class override below. */\n  --chat--window--width: 430px;\n  --chat--window--height: 80vh;\n  --chat--window--border-radius: 16px;\n  --chat--window--border: 1px solid rgba(255, 255, 255, 0.3);\n  --chat--spacing: 1rem; /* 16px base spacing */\n  --chat--window--z-index: 9999;\n  --chat--window--bottom: var(--chat--spacing);\n  --chat--window--right: var(--chat--spacing);\n  --chat--window--margin-bottom: var(--chat--spacing);\n\n  /* --- 3. GLASSMORPHISM BACKGROUNDS --- */\n  /* We make the main sections transparent to let the glass window show through. */\n  --chat--header--background: transparent;\n  --chat--body--background: transparent;\n  --chat--footer--background: transparent;\n\n  /* --- 4. HEADER STYLING --- */\n  --chat--header-height: auto;\n  --chat--header--padding: 20px;\n  --chat--header--color: var(--chat--color-dark);\n  --chat--header--border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle divider */\n  --chat--heading--font-size: 1.5rem;\n  --chat--subtitle--font-size: 0.875rem;\n  --chat--subtitle--line-height: 1.4;\n  --chat--close--button--color-hover: var(--chat--color-primary);\n\n  /* --- 5. MESSAGE BUBBLES --- */\n  --chat--message--font-size: 0.875rem;\n  --chat--message--padding: 12px 16px;\n  --chat--message--border-radius: 12px;\n  --chat--message-line-height: 1.6;\n  --chat--message--margin-bottom: calc(var(--chat--spacing) * 0.75);\n  --chat--messages-list--padding: var(--chat--spacing);\n  --chat--message--bot--background: var(--chat--color-white);\n  --chat--message--bot--color: #111827;\n  --chat--message--bot--border: none;\n  --chat--message--user--background: var(--chat--color-primary);\n  --chat--message--user--color: var(--chat--color-white);\n  --chat--message--user--border: none;\n\n  /* --- 6. INPUT AREA --- */\n  --chat--textarea--height: 50px;\n  --chat--textarea--max-height: 10rem;\n  --chat--input--font-size: 0.9rem;\n  --chat--input--border: 0;\n  --chat--input--border-radius: 12px; /* Rounded input field */\n  --chat--input--padding: 12px 16px;\n  --chat--input--background: rgba(255, 255, 255, 0.5); /* Semi-transparent input */\n  --chat--input--text-color: #111827;\n  --chat--input--line-height: 1.5;\n  --chat--input--border-active: 0;\n\n  /* --- 7. SEND & FILE BUTTONS --- */\n  --chat--input--send--button--background: transparent;\n  --chat--input--send--button--color: var(--chat--color-primary);\n  --chat--input--send--button--background-hover: transparent;\n  --chat--input--send--button--color-hover: var(--chat--color-primary-shade-50);\n  --chat--input--file--button--background: transparent;\n  --chat--input--file--button--color: var(--chat--color-secondary);\n  --chat--input--file--button--background-hover: transparent;\n  --chat--input--file--button--color-hover: var(--chat--color-secondary-shade-50);\n\n  /* --- 8. TOGGLE BUTTON & OTHERS --- */\n  /* Using your primary brand color for the main toggle button */\n  --chat--toggle--size: 64px;\n  --chat--toggle--width: var(--chat--toggle--size);\n  --chat--toggle--height: var(--chat--toggle--size);\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: var(--chat--color-primary);\n  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);\n  --chat--toggle--active--background: var(--chat--color-primary-shade-100);\n  --chat--toggle--color: var(--chat--color-white);\n}\n\n/* === CLASS OVERRIDES === */\n/*\n  These are essential for effects that CSS variables can't control,\n  like the glass blur, shadows, and max-height.\n*/\n\n.chat-window {\n  /* This is the magic for the glass effect! */\n  background-color: rgba(249, 243, 245, 0.6); /* A semi-transparent background color */\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px); /* For Safari compatibility */\n\n  /* A subtle shadow helps lift the window off the page */\n  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);\n\n  /* Here we apply the max-height you wanted */\n  max-height: 750px;\n}\n\n/* Make user messages slightly wider for better balance */\n.chat-message.is-user {\n\tmax-width: 70%;\n}\n\n.chat-message.is-bot {\n\tmax-width: 80%;\n}\n\n/* Add a subtle glow to messages on hover */\n.chat-message {\n    transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n.chat-message:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 0 25px 0 rgba(234, 75, 113, 0.2);\n}\n\n/* === PAGE BACKGROUND === */\n/* Your dotted background to simulate the n8n canvas. Perfect as is! */\nbody {\n    background-color: #FDFBFF;\n    background-image:\n        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.07) 1px, transparent 0),\n        linear-gradient(135deg, #F9F3F5 0%, #EFF3FB 100%);\n    background-size: 25px 25px, 100% 100%;\n}",
-          "responseMode": "responseNodes"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.3,
-      "position": [
-        128,
-        -448
-      ],
-      "id": "5ea4898a-2197-41e8-b06d-ab95e63acbb4",
-      "name": "When chat message received",
-      "webhookId": "35a54de6-c73e-4197-b2d1-212fe3b7c1de"
-    },
-    {
-      "parameters": {
-        "resource": "audio",
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.5-pro",
+          "value": "models/gemini-2.0-flash",
           "mode": "list",
-          "cachedResultName": "models/gemini-2.5-pro"
-        },
-        "inputType": "binary",
-        "binaryPropertyName": "data0",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        768,
-        -592
-      ],
-      "id": "6f8e4a3c-4cd5-4c5d-95a2-01f9a537e715",
-      "name": "Transcribe a recording",
-      "retryOnFail": true,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "I6YdcH8pHMOOoPks",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.0-flash-exp",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-exp"
+          "cachedResultName": "models/gemini-2.0-flash"
         },
         "messages": {
           "values": [
@@ -178,6 +91,233 @@
     },
     {
       "parameters": {
+        "description": "Quando o usuário perguntar sobre datas, horários livres, ou disponibilidade da agenda ou similares quando ele tem interesse em saber a agenda e horarios.",
+        "jsCode": "const action = \"consultar_agenda\";\nreturn action;"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.3,
+      "position": [
+        1664,
+        -224
+      ],
+      "id": "c8c9cb34-ecfe-4cc3-b233-438b08e5e2d5",
+      "name": "consultar_agenda_horarios_disponiveis"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.candidates[0].content.parts[0].text }}",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        5248,
+        -704
+      ],
+      "id": "42033ca0-e83c-4ffb-a02e-9744ad20f41a",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Essa requisição http será sempre executada pois será necessária para agendar.",
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/agendar",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"slot_id\": {{ $('Mostra horários disponíveis').item.json.chatInput }},\n  \"patient_id\": {{ $('Resgata mensganes da memória').item.json.messages[1].system }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        5904,
+        -720
+      ],
+      "id": "b1426b9b-444e-4eb3-82b5-41c3ad0cfc85",
+      "name": "requisição http do agendamento"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Sempre fará uma requisição http para saber as informações de pagamento.",
+        "url": "http://host.docker.internal:8000/pagamento",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        4960,
+        -144
+      ],
+      "id": "05b3eac7-1030-4908-b65d-75aea3e29c32",
+      "name": "Requisição http sobre pagamento"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        -272
+      ],
+      "id": "ef6637ab-3845-4850-89c1-0675ce9a596f",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        3456,
+        -544
+      ],
+      "id": "563ea3c2-39d2-46c4-b347-1b29760c4866",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        4288,
+        -240
+      ],
+      "id": "082aa592-6bfb-4f2c-bbea-35831dd0b8c5",
+      "name": "Simple Memory3"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2160,
+        -256
+      ],
+      "id": "ddc1f640-f63f-41e4-975b-ca7270e62647",
+      "name": "Simple Memory4"
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:8000/pacientes/meus-agendamentos/?email={{ $json.messages[0].system }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        4960,
+        224
+      ],
+      "id": "9a378508-6941-4710-8a74-dc1bba06b8d8",
+      "name": "Requisição HTTP consultas para cancelamento"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:8000/cancelar/{{ $json.chatInput }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        5792,
+        144
+      ],
+      "id": "cbe601e3-57f9-4610-bce7-e27dad3e3878",
+      "name": "Requisição http para cancelar agendamento"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Olá!\n\nSou um assistente de agendamento como posso te ajudar?",
+        "options": {
+          "allowedOrigins": "*",
+          "allowFileUploads": true,
+          "allowedFilesMimeTypes": "*",
+          "inputPlaceholder": "Faça consulta de horários, agende uma consulta ou cancele.",
+          "loadPreviousSession": "memory",
+          "showWelcomeScreen": false,
+          "customCss": "/* === THEME OVERRIDE: n8n Glass & Glow (Revised) === */\n\n/*\n  This theme is built upon the default n8n chat CSS variables.\n  We'll use your desired branding and layout, and then add\n  the \"glass\" effect using a semi-transparent background\n  and a backdrop-filter on the main window class.\n*/\n\n:root {\n  /* --- 1. CORE BRANDING & FONTS --- */\n  /* Your choices for font and primary color are applied here. */\n  --chat--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n  --chat--color-primary: #EA4B71; /* n8n Red */\n  --chat--color-primary-shade-50: #D93A60;\n  --chat--color-primary-shade-100: #C82A50;\n  --chat--color-secondary: #20b69e; /* Kept default secondary for things like file uploads */\n  --chat--color-secondary-shade-50: #1ca08a;\n  --chat--color-white: #ffffff;\n  --chat--color-light: #f2f4f8;\n  --chat--color-dark: #1F2937; /* Darker, more modern text color */\n  --chat--color-disabled: #9CA3AF;\n  --chat--color-typing: #404040;\n\n  /* --- 2. WINDOW & LAYOUT --- */\n  /* Your dimensions and rounded corners. The actual glass effect is handled in the class override below. */\n  --chat--window--width: 430px;\n  --chat--window--height: 80vh;\n  --chat--window--border-radius: 16px;\n  --chat--window--border: 1px solid rgba(255, 255, 255, 0.3);\n  --chat--spacing: 1rem; /* 16px base spacing */\n  --chat--window--z-index: 9999;\n  --chat--window--bottom: var(--chat--spacing);\n  --chat--window--right: var(--chat--spacing);\n  --chat--window--margin-bottom: var(--chat--spacing);\n\n  /* --- 3. GLASSMORPHISM BACKGROUNDS --- */\n  /* We make the main sections transparent to let the glass window show through. */\n  --chat--header--background: transparent;\n  --chat--body--background: transparent;\n  --chat--footer--background: transparent;\n\n  /* --- 4. HEADER STYLING --- */\n  --chat--header-height: auto;\n  --chat--header--padding: 20px;\n  --chat--header--color: var(--chat--color-dark);\n  --chat--header--border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle divider */\n  --chat--heading--font-size: 1.5rem;\n  --chat--subtitle--font-size: 0.875rem;\n  --chat--subtitle--line-height: 1.4;\n  --chat--close--button--color-hover: var(--chat--color-primary);\n\n  /* --- 5. MESSAGE BUBBLES --- */\n  --chat--message--font-size: 0.875rem;\n  --chat--message--padding: 12px 16px;\n  --chat--message--border-radius: 12px;\n  --chat--message-line-height: 1.6;\n  --chat--message--margin-bottom: calc(var(--chat--spacing) * 0.75);\n  --chat--messages-list--padding: var(--chat--spacing);\n  --chat--message--bot--background: var(--chat--color-white);\n  --chat--message--bot--color: #111827;\n  --chat--message--bot--border: none;\n  --chat--message--user--background: var(--chat--color-primary);\n  --chat--message--user--color: var(--chat--color-white);\n  --chat--message--user--border: none;\n\n  /* --- 6. INPUT AREA --- */\n  --chat--textarea--height: 50px;\n  --chat--textarea--max-height: 10rem;\n  --chat--input--font-size: 0.9rem;\n  --chat--input--border: 0;\n  --chat--input--border-radius: 12px; /* Rounded input field */\n  --chat--input--padding: 12px 16px;\n  --chat--input--background: rgba(255, 255, 255, 0.5); /* Semi-transparent input */\n  --chat--input--text-color: #111827;\n  --chat--input--line-height: 1.5;\n  --chat--input--border-active: 0;\n\n  /* --- 7. SEND & FILE BUTTONS --- */\n  --chat--input--send--button--background: transparent;\n  --chat--input--send--button--color: var(--chat--color-primary);\n  --chat--input--send--button--background-hover: transparent;\n  --chat--input--send--button--color-hover: var(--chat--color-primary-shade-50);\n  --chat--input--file--button--background: transparent;\n  --chat--input--file--button--color: var(--chat--color-secondary);\n  --chat--input--file--button--background-hover: transparent;\n  --chat--input--file--button--color-hover: var(--chat--color-secondary-shade-50);\n\n  /* --- 8. TOGGLE BUTTON & OTHERS --- */\n  /* Using your primary brand color for the main toggle button */\n  --chat--toggle--size: 64px;\n  --chat--toggle--width: var(--chat--toggle--size);\n  --chat--toggle--height: var(--chat--toggle--size);\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: var(--chat--color-primary);\n  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);\n  --chat--toggle--active--background: var(--chat--color-primary-shade-100);\n  --chat--toggle--color: var(--chat--color-white);\n}\n\n/* === CLASS OVERRIDES === */\n/*\n  These are essential for effects that CSS variables can't control,\n  like the glass blur, shadows, and max-height.\n*/\n\n.chat-window {\n  /* This is the magic for the glass effect! */\n  background-color: rgba(249, 243, 245, 0.6); /* A semi-transparent background color */\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px); /* For Safari compatibility */\n\n  /* A subtle shadow helps lift the window off the page */\n  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);\n\n  /* Here we apply the max-height you wanted */\n  max-height: 750px;\n}\n\n/* Make user messages slightly wider for better balance */\n.chat-message.is-user {\n\tmax-width: 70%;\n}\n\n.chat-message.is-bot {\n\tmax-width: 80%;\n}\n\n/* Add a subtle glow to messages on hover */\n.chat-message {\n    transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n.chat-message:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 0 25px 0 rgba(234, 75, 113, 0.2);\n}\n\n/* === PAGE BACKGROUND === */\n/* Your dotted background to simulate the n8n canvas. Perfect as is! */\nbody {\n    background-color: #FDFBFF;\n    background-image:\n        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.07) 1px, transparent 0),\n        linear-gradient(135deg, #F9F3F5 0%, #EFF3FB 100%);\n    background-size: 25px 25px, 100% 100%;\n}",
+          "responseMode": "responseNodes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        -448
+      ],
+      "id": "5ea4898a-2197-41e8-b06d-ab95e63acbb4",
+      "name": "Trigger: recebe mensagem",
+      "webhookId": "35a54de6-c73e-4197-b2d1-212fe3b7c1de"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6a0a85f9-b226-4834-9b2d-9e6d54b85c9c",
+              "leftValue": "={{ $('Trigger: recebe mensagem').item.json.files[0].fileType }}",
+              "rightValue": "audio",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        -448
+      ],
+      "id": "0e0a4a11-1ce0-45d6-9e40-a18285e6fcd4",
+      "name": "If: contém audio"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "inputType": "binary",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -592
+      ],
+      "id": "6f8e4a3c-4cd5-4c5d-95a2-01f9a537e715",
+      "name": "Transcreve o audio",
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "I6YdcH8pHMOOoPks",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -197,7 +337,168 @@
         -448
       ],
       "id": "0d9375d1-5541-4c7e-903e-453148da06f4",
-      "name": "Edit Fields"
+      "name": "Extrai o resultado da função"
+    },
+    {
+      "parameters": {
+        "simplifyOutput": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        2160,
+        -448
+      ],
+      "id": "1869ca7c-4fa7-46ce-887a-c1c2f4f5cd99",
+      "name": "Faz contagem do número de mensagens na memória"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8230a5cd-9e9e-42c9-acf4-6e4f1f99ac8e",
+              "leftValue": "={{ $('Faz contagem do número de mensagens na memória').item.json.messagesCount }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2560,
+        -448
+      ],
+      "id": "d7c952d6-0a11-47d8-a4af-450ab418b1fa",
+      "name": "If: verificia se há mensagens na memória"
+    },
+    {
+      "parameters": {
+        "message": "Olá, para iniciarmos digite seu nome completo.",
+        "options": {
+          "memoryConnection": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        2768,
+        -752
+      ],
+      "id": "ed87a3e9-46fb-4a24-803b-f28267c2f363",
+      "name": "Pergunta nome completo"
+    },
+    {
+      "parameters": {
+        "message": "=Eu irei dar seguimento ao seu atendimento, {{ $json.chatInput }}.\n\nAgora, me envie seu e-mail de cadastro.",
+        "options": {
+          "memoryConnection": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        2992,
+        -752
+      ],
+      "id": "41849649-9828-4d84-a885-9eb9088f393a",
+      "name": "Pergunta e-mail"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/pacientes",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $('Pergunta nome completo').item.json.chatInput }}\",\n  \"email\": \"{{ $json.chatInput }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3344,
+        -752
+      ],
+      "id": "0441467c-76e5-444f-9ea8-0536ce78f3ea",
+      "name": "HTTP Request: consulta se há cadastro e faz cadastro",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "96a725c4-5913-489d-b75e-b8954c3ed36a",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3520,
+        -752
+      ],
+      "id": "3995f948-d8c8-4e82-a135-c12855032ca4",
+      "name": "Seleciona o ID do usuário"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "={{ $('Pergunta e-mail').item.json.chatInput }}"
+            },
+            {
+              "type": "user",
+              "message": "={{ $('Pergunta nome completo').item.json.chatInput }}"
+            },
+            {
+              "message": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        3744,
+        -752
+      ],
+      "id": "557b943b-68e9-48cb-8afa-3a484c4c55eb",
+      "name": "Grava nome, email e id na memória"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        4272,
+        -448
+      ],
+      "id": "69f95d00-27d0-471f-826f-7d269c89a9d9",
+      "name": "Resgata mensganes da memória"
     },
     {
       "parameters": {
@@ -213,7 +514,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('Edit Fields').item.json.candidates[0].content.parts[0].text }}",
+                    "leftValue": "={{ $('Extrai o resultado da função').item.json.candidates[0].content.parts[0].text }}",
                     "rightValue": "agendar_consulta",
                     "operator": {
                       "type": "string",
@@ -236,7 +537,7 @@
                 "conditions": [
                   {
                     "id": "23c0d487-8562-4401-8f17-168ef922a9e1",
-                    "leftValue": "={{ $('Edit Fields').item.json.candidates[0].content.parts[0].text }}",
+                    "leftValue": "={{ $('Extrai o resultado da função').item.json.candidates[0].content.parts[0].text }}",
                     "rightValue": "consultar_informacoes_pagamento",
                     "operator": {
                       "type": "string",
@@ -258,7 +559,7 @@
                 "conditions": [
                   {
                     "id": "65847d4d-9543-49d2-a79c-9cf518cdd2fd",
-                    "leftValue": "={{ $('Edit Fields').item.json.candidates[0].content.parts[0].text }}",
+                    "leftValue": "={{ $('Extrai o resultado da função').item.json.candidates[0].content.parts[0].text }}",
                     "rightValue": "cancelar_consulta_ja_marcada",
                     "operator": {
                       "type": "string",
@@ -280,7 +581,7 @@
                 "conditions": [
                   {
                     "id": "60ba65eb-e45e-46c4-ba7c-2f0ffd24ca3d",
-                    "leftValue": "={{ $('Edit Fields').item.json.candidates[0].content.parts[0].text }}",
+                    "leftValue": "={{ $('Extrai o resultado da função').item.json.candidates[0].content.parts[0].text }}",
                     "rightValue": "consultar_agenda_horarios_disponiveis",
                     "operator": {
                       "type": "string",
@@ -302,37 +603,7 @@
         -480
       ],
       "id": "8d5c7323-1319-4459-8c35-b9596cd2ab85",
-      "name": "Switch"
-    },
-    {
-      "parameters": {
-        "description": "Quando o usuário perguntar sobre datas, horários livres, ou disponibilidade da agenda ou similares quando ele tem interesse em saber a agenda e horarios.",
-        "jsCode": "const action = \"consultar_agenda\";\nreturn action;"
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolCode",
-      "typeVersion": 1.3,
-      "position": [
-        1664,
-        -224
-      ],
-      "id": "c8c9cb34-ecfe-4cc3-b233-438b08e5e2d5",
-      "name": "consultar_agenda_horarios_disponiveis"
-    },
-    {
-      "parameters": {
-        "url": "http://host.docker.internal:8000/horarios",
-        "options": {
-          "response": {}
-        }
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        4960,
-        -688
-      ],
-      "id": "a0560b97-1d4e-48f2-93e1-24dc3bf772d9",
-      "name": "HTTP Request1"
+      "name": "Fluxo segue conforme intenção do usuário"
     },
     {
       "parameters": {
@@ -359,7 +630,7 @@
         -880
       ],
       "id": "475ad4c3-f2a9-47b3-a3a3-0dd088e11e42",
-      "name": "Message a model1",
+      "name": "Consulta horários disponíveis",
       "retryOnFail": true,
       "credentials": {
         "googlePalmApi": {
@@ -382,121 +653,7 @@
         -880
       ],
       "id": "15aef2a0-52fb-4223-990a-dec13c28d54d",
-      "name": "Respond to Chat"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.candidates[0].content.parts[0].text }}",
-        "contextWindowLength": 30
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        5248,
-        -704
-      ],
-      "id": "42033ca0-e83c-4ffb-a02e-9744ad20f41a",
-      "name": "Simple Memory"
-    },
-    {
-      "parameters": {
-        "message": "Olá, para iniciarmos digite seu nome completo.",
-        "options": {
-          "memoryConnection": false
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        2768,
-        -752
-      ],
-      "id": "ed87a3e9-46fb-4a24-803b-f28267c2f363",
-      "name": "Respond to Chat1"
-    },
-    {
-      "parameters": {
-        "message": "=Eu irei dar seguimento ao seu atendimento, {{ $json.chatInput }}.\n\nAgora, me envie seu e-mail de cadastro.",
-        "options": {
-          "memoryConnection": true
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        2992,
-        -752
-      ],
-      "id": "41849649-9828-4d84-a885-9eb9088f393a",
-      "name": "Respond to Chat2"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://host.docker.internal:8000/pacientes",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{ $('Respond to Chat1').item.json.chatInput }}\",\n  \"email\": \"{{ $json.chatInput }}\"\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        3344,
-        -752
-      ],
-      "id": "0441467c-76e5-444f-9ea8-0536ce78f3ea",
-      "name": "HTTP Request",
-      "retryOnFail": true
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.0-flash-exp",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-exp"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "Você fará uma requisição HTTP de um agendamento, com o JSON de resposta você irá confirmar para o paciente o dia de agendamento, horário, médico e detalhes relevantes. \n\nVocê finaliza a conversa."
-            }
-          ]
-        },
-        "simplify": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        5760,
-        -896
-      ],
-      "id": "570ddc29-1983-467b-9d26-aeb3160182a8",
-      "name": "Message a model2",
-      "retryOnFail": true,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "I6YdcH8pHMOOoPks",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "message": "Consulta de horários finalizada! Fico disponível para futuras requisições!",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        5504,
-        -640
-      ],
-      "id": "dd1cfbb4-94a4-4393-8a38-e0f4ea0d72f2",
-      "name": "Respond to Chat3"
+      "name": "Mostra horários disponíveis"
     },
     {
       "parameters": {
@@ -558,54 +715,20 @@
         -880
       ],
       "id": "bb1cee52-7614-4e1f-b352-184eed0451fd",
-      "name": "Switch1"
-    },
-    {
-      "parameters": {
-        "toolDescription": "Essa requisição http será sempre executada pois será necessária para agendar.",
-        "method": "POST",
-        "url": "http://host.docker.internal:8000/agendar",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"slot_id\": {{ $('Respond to Chat').item.json.chatInput }},\n  \"patient_id\": {{ $('Chat Memory Manager2').item.json.messages[1].system }}\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        5808,
-        -688
-      ],
-      "id": "b1426b9b-444e-4eb3-82b5-41c3ad0cfc85",
-      "name": "requisição http do agendamento"
-    },
-    {
-      "parameters": {
-        "toolDescription": "Sempre fará uma requisição http para saber as informações de pagamento.",
-        "url": "http://host.docker.internal:8000/pagamento",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        4960,
-        -144
-      ],
-      "id": "05b3eac7-1030-4908-b65d-75aea3e29c32",
-      "name": "Requisição http sobre pagamento"
+      "name": "Verifica se usuário pediu para sair"
     },
     {
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.0-flash",
+          "value": "models/gemini-2.0-flash-exp",
           "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash"
+          "cachedResultName": "models/gemini-2.0-flash-exp"
         },
         "messages": {
           "values": [
             {
-              "content": "Você sempre fará uma requisição http via tools, com o JSON de resposta você estruturará uma mensagem de resposta para o usuário sobre informações de pagamento possiveis para sua consulta. Lembre-se que você é um atendente e sua resposta irá ser exibida diretamente a um usuario, então tenha isso como ponto central ao elaborar a resposta.\nFinaliza a conversa."
+              "content": "Você fará uma requisição HTTP de um agendamento, com o JSON de resposta você irá confirmar para o paciente o dia de agendamento, horário, médico e detalhes relevantes. \n\nVocê finaliza a conversa."
             }
           ]
         },
@@ -615,11 +738,11 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        4816,
-        -352
+        5760,
+        -896
       ],
-      "id": "14a48d23-78b9-4f8d-af99-8aff55a48302",
-      "name": "Mensagens sobre pagamentos",
+      "id": "570ddc29-1983-467b-9d26-aeb3160182a8",
+      "name": "Agenda o horário para o usuário",
       "retryOnFail": true,
       "credentials": {
         "googlePalmApi": {
@@ -627,122 +750,6 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       }
-    },
-    {
-      "parameters": {
-        "message": "={{ $json.candidates[0].content.parts[0].text }}",
-        "waitUserReply": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        5248,
-        -352
-      ],
-      "id": "f5ee3360-8dc7-451d-ab9f-a684e9f89b71",
-      "name": "Respond to Chat5"
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.5-flash",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "Você irá fazer a consulta HTTP via tools, e irá receber um JSON de consultas agendadas para o usuário solicitado. Você é um secretário atendendo o usuário que quer cancelar uma dessas consultas, você deve mostrar de forma amigável e formatada as opções de horáriso agendados, pedindo para ele confirmar qual ID de agendamento ele quer cancelar. Lembre-se que você é um secretário falando com um humano. Para sair, o usuario pode digitar \"Sair\""
-            }
-          ]
-        },
-        "simplify": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        4816,
-        48
-      ],
-      "id": "c09c8e69-43bd-4065-a43e-83caf14ebdcb",
-      "name": "Message a model3",
-      "retryOnFail": true,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "I6YdcH8pHMOOoPks",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "url": "http://host.docker.internal:8000/horarios",
-        "options": {
-          "response": {}
-        }
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        4848,
-        864
-      ],
-      "id": "decf61b9-ea83-440c-a0bc-f4343193e18a",
-      "name": "HTTP Request2"
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.0-flash-lite",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-lite"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "Faça uma HTTP request, e baseado no JSON recebido faça o seguinte:\n\nVocê é um assistente de agendamento. O usuário perguntou sobre horários disponíveis e a API irá uma lista JSON. Apresente esta lista de forma amigável e clara para o usuário. Para cada médico, mostra no máximo os 3 horários mais próximo de hoje. Lembre-se que você é um atendente e sua resposta irá ser exibida diretamente a um usuario, então tenha isso como ponto central ao elaborar a resposta.\n\nFinalize a conversa após a consulta."
-            }
-          ]
-        },
-        "simplify": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        4704,
-        640
-      ],
-      "id": "c7c2c19d-11c4-4714-88e0-949f9ebc278e",
-      "name": "Message a model5",
-      "retryOnFail": true,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "I6YdcH8pHMOOoPks",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "message": "={{ $json.candidates[0].content.parts[0].text }}",
-        "waitUserReply": false,
-        "options": {
-          "memoryConnection": false
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        5120,
-        640
-      ],
-      "id": "ecb976bc-a9ed-45e4-be19-641e21bb72cc",
-      "name": "Respond to Chat6"
     },
     {
       "parameters": {
@@ -784,7 +791,7 @@
         -896
       ],
       "id": "f18b89f5-ba6a-4f7b-840a-ccf85c16576a",
-      "name": "If1"
+      "name": "If: Verifica se retornou erro"
     },
     {
       "parameters": {
@@ -799,7 +806,64 @@
         -896
       ],
       "id": "a4200d15-ec4c-4758-9236-8fe4b8afe6f4",
-      "name": "Respond to Chat4"
+      "name": "Cofirma agendamento"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Tranforme esse estrutura: {{ $json.candidates[0].content.parts[0].text }} em uma estrutura HTML para uma estrutura de email. Retorne excluisamente o HTML, sem extras. O HTML deve sempre seguir a seguinte estrutura, trocando as variaveis correspondentese ao usar a saudação utilize o nome do usuario: {{ $('Resgata mensganes da memória').item.json.messages[1].human }}. Não coloque ID de consulta, e sim a especialidade do médico. \n\n<!DOCTYPE html>\\n<html>\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <title>Confirmação de Agendamento</title>\\n  <style>\\n    body {\\n      font-family: Arial, sans-serif;\\n      line-height: 1.6;\\n      color: #333;\\n    }\\n    .container {\\n      width: 80%;\\n      margin: 0 auto;\\n      padding: 20px;\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    h1 {\\n      color: #007bff;\\n    }\\n    p {\\n      margin-bottom: 15px;\\n    }\\n    .info {\\n      margin-top: 20px;\\n      padding: 15px;\\n      background-color: #f8f9fa;\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    .info strong {\\n      font-weight: bold;\\n    }\\n    .footer {\\n      margin-top: 30px;\\n      text-align: center;\\n      color: #777;\\n    }\\n  </style>\\n</head>\\n<body>\\n  <div class=\\\"container\\\">\\n    <h1>Confirmação de Agendamento</h1>\\n    <p>Olá, Patrick Batista!</p>\\n    <p>Confirmamos o seu agendamento de consulta.</p>\\n\\n    <div class=\\\"info\\\">\\n      <p><strong>Detalhes do Agendamento:</strong></p>\\n      <ul>\\n        <li><strong>ID da Consulta:</strong> 7</li>\\n        <li><strong>Data/Horário:</strong> 01/11/2025 às 09:00</li>\\n        <li><strong>Médico:</strong> Dr. João Silva</li>\\n      </ul>\\n    </div>\\n\\n    <p>Agradecemos por escolher nossa clínica.  Por favor, chegue 15 minutos antes do horário agendado.</p>\\n    <p>Estamos ansiosos para te atender!</p>\\n\\n    <div class=\\\"footer\\\">\\n      Atenciosamente,<br>\\n      Sua Clínica\\n    </div>\\n  </div>\\n</body>\\n</html>"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        6688,
+        -896
+      ],
+      "id": "c96b362a-5af3-41e7-a778-49dd6e19cd89",
+      "name": "Trnaforma em HTML para e-mail",
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "I6YdcH8pHMOOoPks",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Resgata mensganes da memória').item.json.messages[0].human }}",
+        "subject": "Agendamento feito com sucesso!",
+        "message": "={{ $json.content.parts[0].text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        7040,
+        -896
+      ],
+      "id": "3d8ba276-c72e-4596-ab2d-dcf7798d2668",
+      "name": "Envia e-mail de agendamento",
+      "webhookId": "da631a3d-e42b-47a6-bc3b-e8b719280ffd",
+      "retryOnFail": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "soasQEYVGUz1RnrH",
+          "name": "Gmail account"
+        }
+      }
     },
     {
       "parameters": {
@@ -814,179 +878,90 @@
         -640
       ],
       "id": "838ffa33-939a-4117-9b50-1d46d84b0171",
-      "name": "Respond to Chat7"
+      "name": "Retorna devido opção incorreta"
     },
     {
       "parameters": {
-        "contextWindowLength": 30
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        176,
-        -272
-      ],
-      "id": "ef6637ab-3845-4850-89c1-0675ce9a596f",
-      "name": "Simple Memory2"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "8230a5cd-9e9e-42c9-acf4-6e4f1f99ac8e",
-              "leftValue": "={{ $('Chat Memory Manager1').item.json.messagesCount }}",
-              "rightValue": 0,
-              "operator": {
-                "type": "number",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash"
         },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        2560,
-        -448
-      ],
-      "id": "d7c952d6-0a11-47d8-a4af-450ab418b1fa",
-      "name": "If2"
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        3456,
-        -544
-      ],
-      "id": "563ea3c2-39d2-46c4-b347-1b29760c4866",
-      "name": "Simple Memory1"
-    },
-    {
-      "parameters": {
-        "mode": "insert",
         "messages": {
-          "messageValues": [
+          "values": [
             {
-              "message": "={{ $('Respond to Chat2').item.json.chatInput }}"
-            },
-            {
-              "type": "user",
-              "message": "={{ $('Respond to Chat1').item.json.chatInput }}"
-            },
-            {
-              "message": "={{ $json.id }}"
-            }
-          ]
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryManager",
-      "typeVersion": 1.1,
-      "position": [
-        3744,
-        -752
-      ],
-      "id": "557b943b-68e9-48cb-8afa-3a484c4c55eb",
-      "name": "Chat Memory Manager"
-    },
-    {
-      "parameters": {
-        "simplifyOutput": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryManager",
-      "typeVersion": 1.1,
-      "position": [
-        2160,
-        -448
-      ],
-      "id": "1869ca7c-4fa7-46ce-887a-c1c2f4f5cd99",
-      "name": "Chat Memory Manager1"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "96a725c4-5913-489d-b75e-b8954c3ed36a",
-              "name": "id",
-              "value": "={{ $json.id }}",
-              "type": "string"
+              "content": "Você sempre fará uma requisição http via tools, com o JSON de resposta você estruturará uma mensagem de resposta para o usuário sobre informações de pagamento possiveis para sua consulta. Lembre-se que você é um atendente e sua resposta irá ser exibida diretamente a um usuario, então tenha isso como ponto central ao elaborar a resposta.\nFinaliza a conversa."
             }
           ]
         },
+        "simplify": false,
         "options": {}
       },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
       "position": [
-        3520,
-        -752
+        4816,
+        -352
       ],
-      "id": "3995f948-d8c8-4e82-a135-c12855032ca4",
-      "name": "Edit Fields1"
+      "id": "14a48d23-78b9-4f8d-af99-8aff55a48302",
+      "name": "Requisição de informações de pagamento",
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "I6YdcH8pHMOOoPks",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
+        "message": "={{ $json.candidates[0].content.parts[0].text }}",
+        "waitUserReply": false,
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.memoryManager",
-      "typeVersion": 1.1,
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
       "position": [
-        4272,
-        -448
+        5248,
+        -352
       ],
-      "id": "69f95d00-27d0-471f-826f-7d269c89a9d9",
-      "name": "Chat Memory Manager2"
+      "id": "f5ee3360-8dc7-451d-ab9f-a684e9f89b71",
+      "name": "Retorna informações de pagamento"
     },
     {
       "parameters": {
-        "contextWindowLength": 30
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        4288,
-        -240
-      ],
-      "id": "082aa592-6bfb-4f2c-bbea-35831dd0b8c5",
-      "name": "Simple Memory3"
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        2176,
-        -240
-      ],
-      "id": "ddc1f640-f63f-41e4-975b-ca7270e62647",
-      "name": "Simple Memory4"
-    },
-    {
-      "parameters": {
-        "url": "=http://host.docker.internal:8000/pacientes/meus-agendamentos/?email={{ $json.messages[0].system }}",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Você irá fazer a consulta HTTP via tools, e irá receber um JSON de consultas agendadas para o usuário solicitado. Você é um secretário atendendo o usuário que quer cancelar uma dessas consultas, você deve mostrar de forma amigável e formatada as opções de horáriso agendados, pedindo para ele confirmar qual ID de agendamento ele quer cancelar. Lembre-se que você é um secretário falando com um humano. Para sair, o usuario pode digitar \"Sair\""
+            }
+          ]
+        },
+        "simplify": false,
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
       "position": [
-        4960,
-        224
+        4816,
+        48
       ],
-      "id": "9a378508-6941-4710-8a74-dc1bba06b8d8",
-      "name": "Requisição HTTP consultas para cancelamento"
+      "id": "c09c8e69-43bd-4065-a43e-83caf14ebdcb",
+      "name": "Consulta horários já agendados do usuário",
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "I6YdcH8pHMOOoPks",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -1000,7 +975,7 @@
         48
       ],
       "id": "cf5e0a73-5148-42b2-bc57-b2c64e44def6",
-      "name": "Respond to Chat8"
+      "name": "Mostra a agenda do usuário"
     },
     {
       "parameters": {
@@ -1062,7 +1037,36 @@
         48
       ],
       "id": "b4e043af-e1cf-4e23-84ca-fa45e7a4a938",
-      "name": "Switch2"
+      "name": "Verifica se o usuário pediu para sair"
+    },
+    {
+      "parameters": {
+        "message": "Você optou por sair, mas continuo disponível para novas solicitações!",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        5536,
+        176
+      ],
+      "id": "da7cdb5c-757c-450e-a5ce-ffd8db213b81",
+      "name": "Confirma que o usuário finalizou a sessão"
+    },
+    {
+      "parameters": {
+        "message": "Consulta de horários finalizada! Fico disponível para futuras requisições!",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        5504,
+        -640
+      ],
+      "id": "dd1cfbb4-94a4-4393-8a38-e0f4ea0d72f2",
+      "name": "Confirma que o usuário finalizou a sessão1"
     },
     {
       "parameters": {
@@ -1088,7 +1092,7 @@
         -48
       ],
       "id": "be41700b-131c-412a-83d7-c0eb9ac7e638",
-      "name": "Message a model4",
+      "name": "Faz a requisição do cancelamento do horário",
       "retryOnFail": true,
       "credentials": {
         "googlePalmApi": {
@@ -1096,36 +1100,6 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       }
-    },
-    {
-      "parameters": {
-        "message": "Você optou por sair, mas continuo disponível para novas solicitações!",
-        "waitUserReply": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        5536,
-        176
-      ],
-      "id": "da7cdb5c-757c-450e-a5ce-ffd8db213b81",
-      "name": "Respond to Chat9"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=http://host.docker.internal:8000/cancelar/{{ $json.chatInput }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        5792,
-        144
-      ],
-      "id": "cbe601e3-57f9-4610-bce7-e27dad3e3878",
-      "name": "Requisição http para cancelar agendamento"
     },
     {
       "parameters": {
@@ -1167,21 +1141,7 @@
         -48
       ],
       "id": "2c98f1da-e3bd-42c6-a77b-964f009be8ba",
-      "name": "If3"
-    },
-    {
-      "parameters": {
-        "message": "Essa opção está incorreta, por favor tente novamente.",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        6336,
-        304
-      ],
-      "id": "0bb08a7b-459d-4a4b-91d5-80e14222cd56",
-      "name": "Respond to Chat10"
+      "name": "If: Verifica se ocorreu erro"
     },
     {
       "parameters": {
@@ -1196,44 +1156,20 @@
         -48
       ],
       "id": "d7ab5a77-23dd-4173-9cad-24673af51aa8",
-      "name": "Respond to Chat11"
-    },
-    {
-      "parameters": {
-        "sendTo": "={{ $('Chat Memory Manager2').item.json.messages[0].system }}",
-        "subject": "Sua consulta foi cancelada com sucesso.",
-        "message": "={{ $json.content.parts[0].text }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.1,
-      "position": [
-        6864,
-        -48
-      ],
-      "id": "3f0fdfd7-9636-4c67-a137-4fbb57785bcc",
-      "name": "Send a message",
-      "webhookId": "7ecd5cc4-f6ef-4db8-85d6-e7252f217543",
-      "retryOnFail": true,
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "soasQEYVGUz1RnrH",
-          "name": "Gmail account"
-        }
-      }
+      "name": "Confirma o cancelamento do horário"
     },
     {
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.0-flash-exp",
+          "value": "models/gemini-2.0-flash",
           "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-exp"
+          "cachedResultName": "models/gemini-2.0-flash"
         },
         "messages": {
           "values": [
             {
-              "content": "=Tranforme esse estrutura:  {{ $json.content.parts[0].text }} em uma estrutura HTML para uma estrutura de email. Retorne excluisamente o HTML, sem extras. O HTML deve sempre seguir a seguinte estrutura, trocando as variaveis correspondentese ao usar a saudação utilize o nome do usuario: {{ $('Chat Memory Manager2').item.json.messages[1].human }}:\n\n<!DOCTYPE html>\\n<html>\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <title>Cancelamento de Consulta</title>\\n  <style>\\n    body {\\n      font-family: Arial, sans-serif;\\n      line-height: 1.6;\\n      color: #333;\\n    }\\n    .container {\\n      width: 80%;\\n      margin: 0 auto;\\n      padding: 20px;\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    h1 {\\n      color: #007bff; /* Azul */\\n    }\\n    p {\\n      margin-bottom: 15px;\\n    }\\n    .info {\\n      margin-top: 20px;\\n      padding: 15px;\\n      background-color: #f8f9fa; /* Cinza claro */\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    .info strong {\\n      font-weight: bold;\\n    }\\n    .footer {\\n      margin-top: 30px;\\n      text-align: center;\\n      color: #777;\\n    }\\n  </style>\\n</head>\\n<body>\\n  <div class=\\\"container\\\">\\n    <h1>Cancelamento de Consulta</h1>\\n    <p>Prezado(a) paciente,</p>\\n    <p>Confirmamos o cancelamento da sua consulta.</p>\\n\\n    <div class=\\\"info\\\">\\n      <p><strong>Informações:</strong></p>\\n      <ul>\\n        <li><strong>ID da Consulta:</strong> 7</li>\\n        <li><strong>Data/Horário:</strong> 01/11/2025 às 09:00</li>\\n        <li><strong>Médico:</strong> Dr. João Silva</li>\\n      </ul>\\n    </div>\\n\\n    <p>Caso necessite de mais alguma coisa, estamos à disposição!</p>\\n    <p>Finalizamos o atendimento.</p>\\n\\n    <div class=\\\"footer\\\">\\n      Atenciosamente,<br>\\n      Sua Clínica\\n    </div>\\n  </div>\\n</body>\\n</html>\\n```\\n\\n**Explicação da Estrutura:**\\n\\n*   **`<!DOCTYPE html>`**: Declara o tipo de documento como HTML5.\\n*   **`<html>`**:  Elemento raiz do documento HTML.\\n*   **`<head>`**: Contém metadados sobre o documento, como o título e estilos CSS.\\n    *   **`<meta charset=\\\"UTF-8\\\">`**: Define a codificação de caracteres para UTF-8, que suporta a maioria dos caracteres especiais.\\n    *   **`<title>`**: Define o título da página (aparece na aba do navegador).\\n    *   **`<style>`**: Define os estilos CSS para formatar o email.  Estes estilos estão *incorporados* (inline) para garantir a exibição correta em diferentes clientes de email.  O CSS inline é mais seguro para emails, pois muitos clientes de email ignoram estilos externos ou embutidos no `<head>`.\\n*   **`<body>`**: Contém o conteúdo visível do email.\\n    *   **`<div class=\\\"container\\\">`**: Cria um contêiner para o conteúdo do email, centralizando-o e adicionando uma borda.\\n    *   **`<h1>`**: Título principal do email.\\n    *   **`<p>`**:  Parágrafos de texto.\\n    *   **`<div class=\\\"info\\\">`**:  Contém as informações da consulta cancelada.\\n        *   **`<ul>` e `<li>`**: Listas não ordenadas para formatar as informações da consulta.\\n        *   **`<strong>`**:  Enfatiza os rótulos das informações (ID, Data/Horário, Médico).\\n    *   **`<div class=\\\"footer\\\">`**:  Rodapé do email com informações de contato ou agradecimentos.\\n\\n**Considerações Importantes para Emails:**\\n\\n*   **CSS Inline:**  A prática mais segura para emails é usar CSS *inline*, ou seja, diretamente nos elementos HTML.  Muitos clientes de email não suportam ou interpretam incorretamente estilos definidos em arquivos CSS externos ou na tag `<style>` no `<head>`. No entanto, para emails mais simples, como este, o CSS no `<head>` normalmente funciona bem e facilita a manutenção.  Se você tiver problemas de formatação em alguns clientes de email, considere mover os estilos para inline.\\n*   **Tabelas:** Em alguns casos, você pode precisar usar tabelas (`<table>`) para garantir o layout correto, especialmente em clientes de email mais antigos.\\n*   **Imagens:** Se você usar imagens, certifique-se de que elas estejam hospedadas em um servidor acessível publicamente e use URLs absolutos para as imagens.  Adicione o atributo `alt` para acessibilidade e para exibir um texto alternativo se a imagem não puder ser carregada.\\n*   **Testes:** Teste seu email em diferentes clientes de email (Gmail, Outlook, Yahoo, etc.) e dispositivos (desktop, mobile) para garantir que ele seja exibido corretamente em todos os ambientes.\\n*   **Responsividade:**  Para emails responsivos (que se adaptam a diferentes tamanhos de tela), use media queries no CSS.\\n*   **Codificação:** Use `UTF-8` para garantir que todos os caracteres sejam exibidos corretamente.\\n*   **Largura:** Evite larguras excessivas (geralmente, largura máxima de 600-800 pixels) para evitar problemas de exibição em alguns clientes de email.\\n*   **Acessibilidade:**  Considere a acessibilidade ao criar seu email (por exemplo, usar texto alternativo para imagens, fornecer estrutura de cabeçalho adequada).\\n\\nEsta estrutura HTML fornece uma base sólida para um email de cancelamento de consulta.  Você pode personalizar ainda mais o design e o conteúdo para atender às suas necessidades específicas.  Lembre-se de testar o email em diferentes clientes e dispositivos antes de enviá-lo em massa."
+              "content": "=Tranforme esse estrutura:  {{ $json.content.parts[0].text }} em uma estrutura HTML para uma estrutura de email. Retorne excluisamente o HTML, sem extras. O HTML deve sempre seguir a seguinte estrutura, trocando as variaveis correspondentese ao usar a saudação utilize o nome do usuario: {{ $('Resgata mensganes da memória').item.json.messages[1].human }}:\n\n<!DOCTYPE html>\\n<html>\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <title>Cancelamento de Consulta</title>\\n  <style>\\n    body {\\n      font-family: Arial, sans-serif;\\n      line-height: 1.6;\\n      color: #333;\\n    }\\n    .container {\\n      width: 80%;\\n      margin: 0 auto;\\n      padding: 20px;\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    h1 {\\n      color: #007bff; /* Azul */\\n    }\\n    p {\\n      margin-bottom: 15px;\\n    }\\n    .info {\\n      margin-top: 20px;\\n      padding: 15px;\\n      background-color: #f8f9fa; /* Cinza claro */\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    .info strong {\\n      font-weight: bold;\\n    }\\n    .footer {\\n      margin-top: 30px;\\n      text-align: center;\\n      color: #777;\\n    }\\n  </style>\\n</head>\\n<body>\\n  <div class=\\\"container\\\">\\n    <h1>Cancelamento de Consulta</h1>\\n    <p>Prezado(a) paciente,</p>\\n    <p>Confirmamos o cancelamento da sua consulta.</p>\\n\\n    <div class=\\\"info\\\">\\n      <p><strong>Informações:</strong></p>\\n      <ul>\\n        <li><strong>ID da Consulta:</strong> 7</li>\\n        <li><strong>Data/Horário:</strong> 01/11/2025 às 09:00</li>\\n        <li><strong>Médico:</strong> Dr. João Silva</li>\\n      </ul>\\n    </div>\\n\\n    <p>Caso necessite de mais alguma coisa, estamos à disposição!</p>\\n    <p>Finalizamos o atendimento.</p>\\n\\n    <div class=\\\"footer\\\">\\n      Atenciosamente,<br>\\n      Sua Clínica\\n    </div>\\n  </div>\\n</body>\\n</html>\\n```\\n\\n**Explicação da Estrutura:**\\n\\n*   **`<!DOCTYPE html>`**: Declara o tipo de documento como HTML5.\\n*   **`<html>`**:  Elemento raiz do documento HTML.\\n*   **`<head>`**: Contém metadados sobre o documento, como o título e estilos CSS.\\n    *   **`<meta charset=\\\"UTF-8\\\">`**: Define a codificação de caracteres para UTF-8, que suporta a maioria dos caracteres especiais.\\n    *   **`<title>`**: Define o título da página (aparece na aba do navegador).\\n    *   **`<style>`**: Define os estilos CSS para formatar o email.  Estes estilos estão *incorporados* (inline) para garantir a exibição correta em diferentes clientes de email.  O CSS inline é mais seguro para emails, pois muitos clientes de email ignoram estilos externos ou embutidos no `<head>`.\\n*   **`<body>`**: Contém o conteúdo visível do email.\\n    *   **`<div class=\\\"container\\\">`**: Cria um contêiner para o conteúdo do email, centralizando-o e adicionando uma borda.\\n    *   **`<h1>`**: Título principal do email.\\n    *   **`<p>`**:  Parágrafos de texto.\\n    *   **`<div class=\\\"info\\\">`**:  Contém as informações da consulta cancelada.\\n        *   **`<ul>` e `<li>`**: Listas não ordenadas para formatar as informações da consulta.\\n        *   **`<strong>`**:  Enfatiza os rótulos das informações (ID, Data/Horário, Médico).\\n    *   **`<div class=\\\"footer\\\">`**:  Rodapé do email com informações de contato ou agradecimentos.\\n\\n**Considerações Importantes para Emails:**\\n\\n*   **CSS Inline:**  A prática mais segura para emails é usar CSS *inline*, ou seja, diretamente nos elementos HTML.  Muitos clientes de email não suportam ou interpretam incorretamente estilos definidos em arquivos CSS externos ou na tag `<style>` no `<head>`. No entanto, para emails mais simples, como este, o CSS no `<head>` normalmente funciona bem e facilita a manutenção.  Se você tiver problemas de formatação em alguns clientes de email, considere mover os estilos para inline.\\n*   **Tabelas:** Em alguns casos, você pode precisar usar tabelas (`<table>`) para garantir o layout correto, especialmente em clientes de email mais antigos.\\n*   **Imagens:** Se você usar imagens, certifique-se de que elas estejam hospedadas em um servidor acessível publicamente e use URLs absolutos para as imagens.  Adicione o atributo `alt` para acessibilidade e para exibir um texto alternativo se a imagem não puder ser carregada.\\n*   **Testes:** Teste seu email em diferentes clientes de email (Gmail, Outlook, Yahoo, etc.) e dispositivos (desktop, mobile) para garantir que ele seja exibido corretamente em todos os ambientes.\\n*   **Responsividade:**  Para emails responsivos (que se adaptam a diferentes tamanhos de tela), use media queries no CSS.\\n*   **Codificação:** Use `UTF-8` para garantir que todos os caracteres sejam exibidos corretamente.\\n*   **Largura:** Evite larguras excessivas (geralmente, largura máxima de 600-800 pixels) para evitar problemas de exibição em alguns clientes de email.\\n*   **Acessibilidade:**  Considere a acessibilidade ao criar seu email (por exemplo, usar texto alternativo para imagens, fornecer estrutura de cabeçalho adequada).\\n\\nEsta estrutura HTML fornece uma base sólida para um email de cancelamento de consulta.  Você pode personalizar ainda mais o design e o conteúdo para atender às suas necessidades específicas.  Lembre-se de testar o email em diferentes clientes e dispositivos antes de enviá-lo em massa."
             }
           ]
         },
@@ -1246,7 +1182,7 @@
         -48
       ],
       "id": "f132847f-8d01-47b8-b707-805b0d5c013a",
-      "name": "Message a model6",
+      "name": "Transforma em HTML para e-mail",
       "retryOnFail": true,
       "credentials": {
         "googlePalmApi": {
@@ -1257,53 +1193,20 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.0-flash-exp",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-exp"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "=Tranforme esse estrutura: {{ $json.candidates[0].content.parts[0].text }} em uma estrutura HTML para uma estrutura de email. Retorne excluisamente o HTML, sem extras. O HTML deve sempre seguir a seguinte estrutura, trocando as variaveis correspondentese ao usar a saudação utilize o nome do usuario: {{ $('Chat Memory Manager2').item.json.messages[1].human }}. Não coloque ID de consulta, e sim a especialidade do médico. \n\n<!DOCTYPE html>\\n<html>\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <title>Confirmação de Agendamento</title>\\n  <style>\\n    body {\\n      font-family: Arial, sans-serif;\\n      line-height: 1.6;\\n      color: #333;\\n    }\\n    .container {\\n      width: 80%;\\n      margin: 0 auto;\\n      padding: 20px;\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    h1 {\\n      color: #007bff;\\n    }\\n    p {\\n      margin-bottom: 15px;\\n    }\\n    .info {\\n      margin-top: 20px;\\n      padding: 15px;\\n      background-color: #f8f9fa;\\n      border: 1px solid #ddd;\\n      border-radius: 5px;\\n    }\\n    .info strong {\\n      font-weight: bold;\\n    }\\n    .footer {\\n      margin-top: 30px;\\n      text-align: center;\\n      color: #777;\\n    }\\n  </style>\\n</head>\\n<body>\\n  <div class=\\\"container\\\">\\n    <h1>Confirmação de Agendamento</h1>\\n    <p>Olá, Patrick Batista!</p>\\n    <p>Confirmamos o seu agendamento de consulta.</p>\\n\\n    <div class=\\\"info\\\">\\n      <p><strong>Detalhes do Agendamento:</strong></p>\\n      <ul>\\n        <li><strong>ID da Consulta:</strong> 7</li>\\n        <li><strong>Data/Horário:</strong> 01/11/2025 às 09:00</li>\\n        <li><strong>Médico:</strong> Dr. João Silva</li>\\n      </ul>\\n    </div>\\n\\n    <p>Agradecemos por escolher nossa clínica.  Por favor, chegue 15 minutos antes do horário agendado.</p>\\n    <p>Estamos ansiosos para te atender!</p>\\n\\n    <div class=\\\"footer\\\">\\n      Atenciosamente,<br>\\n      Sua Clínica\\n    </div>\\n  </div>\\n</body>\\n</html>"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        6688,
-        -896
-      ],
-      "id": "c96b362a-5af3-41e7-a778-49dd6e19cd89",
-      "name": "Message a model7",
-      "retryOnFail": true,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "I6YdcH8pHMOOoPks",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sendTo": "={{ $('Chat Memory Manager2').item.json.messages[0].human }}",
-        "subject": "Agendamento feito com sucesso!",
+        "sendTo": "={{ $('Resgata mensganes da memória').item.json.messages[0].system }}",
+        "subject": "Sua consulta foi cancelada com sucesso.",
         "message": "={{ $json.content.parts[0].text }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        7040,
-        -896
+        6864,
+        -48
       ],
-      "id": "3d8ba276-c72e-4596-ab2d-dcf7798d2668",
-      "name": "Send a message1",
-      "webhookId": "da631a3d-e42b-47a6-bc3b-e8b719280ffd",
+      "id": "3f0fdfd7-9636-4c67-a137-4fbb57785bcc",
+      "name": "Envia e-mail de cancelamento",
+      "webhookId": "7ecd5cc4-f6ef-4db8-85d6-e7252f217543",
       "retryOnFail": true,
       "credentials": {
         "gmailOAuth2": {
@@ -1311,50 +1214,107 @@
           "name": "Gmail account"
         }
       }
+    },
+    {
+      "parameters": {
+        "message": "Essa opção está incorreta, por favor tente novamente.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        6336,
+        304
+      ],
+      "id": "0bb08a7b-459d-4a4b-91d5-80e14222cd56",
+      "name": "Retorna se ocorreu erro"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-lite",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-lite"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Faça uma HTTP request, e baseado no JSON recebido faça o seguinte:\n\nVocê é um assistente de agendamento. O usuário perguntou sobre horários disponíveis e a API irá uma lista JSON. Apresente esta lista de forma amigável e clara para o usuário. Para cada médico, mostra no máximo os 3 horários mais próximo de hoje. Lembre-se que você é um atendente e sua resposta irá ser exibida diretamente a um usuario, então tenha isso como ponto central ao elaborar a resposta.\n\nFinalize a conversa após a consulta."
+            }
+          ]
+        },
+        "simplify": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        4704,
+        640
+      ],
+      "id": "c7c2c19d-11c4-4714-88e0-949f9ebc278e",
+      "name": "Consulta slots de horário disponível",
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "I6YdcH8pHMOOoPks",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:8000/horarios",
+        "options": {
+          "response": {}
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        4848,
+        864
+      ],
+      "id": "decf61b9-ea83-440c-a0bc-f4343193e18a",
+      "name": "HTTP consulta de horários"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.candidates[0].content.parts[0].text }}",
+        "waitUserReply": false,
+        "options": {
+          "memoryConnection": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        5120,
+        640
+      ],
+      "id": "ecb976bc-a9ed-45e4-be19-641e21bb72cc",
+      "name": "Retorna para o usuário os horários disponíveis"
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:8000/horarios",
+        "options": {
+          "response": {}
+        }
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        4992,
+        -688
+      ],
+      "id": "a0560b97-1d4e-48f2-93e1-24dc3bf772d9",
+      "name": "HTTP Requisição de horários disponíveis"
     }
   ],
   "pinData": {},
   "connections": {
-    "If": {
-      "main": [
-        [
-          {
-            "node": "Transcribe a recording",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Transcribe a recording": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Merge": {
       "main": [
         [
@@ -1370,7 +1330,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Extrai o resultado da função",
             "type": "main",
             "index": 0
           }
@@ -1410,49 +1370,6 @@
         ]
       ]
     },
-    "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "Chat Memory Manager1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "Message a model1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Mensagens sobre pagamentos",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Message a model3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Message a model5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "consultar_agenda_horarios_disponiveis": {
       "ai_tool": [
         [
@@ -1464,107 +1381,12 @@
         ]
       ]
     },
-    "HTTP Request1": {
-      "ai_tool": [
-        [
-          {
-            "node": "Message a model1",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Message a model1": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Simple Memory": {
       "ai_memory": [
         [
           {
-            "node": "Respond to Chat",
+            "node": "Mostra horários disponíveis",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Respond to Chat": {
-      "main": [
-        [
-          {
-            "node": "Switch1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Respond to Chat1": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Respond to Chat2": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch1": {
-      "main": [
-        [
-          {
-            "node": "Message a model2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Respond to Chat3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Message a model2": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
             "index": 0
           }
         ]
@@ -1574,7 +1396,7 @@
       "ai_tool": [
         [
           {
-            "node": "Message a model2",
+            "node": "Agenda o horário para o usuário",
             "type": "ai_tool",
             "index": 0
           }
@@ -1585,81 +1407,8 @@
       "ai_tool": [
         [
           {
-            "node": "Mensagens sobre pagamentos",
+            "node": "Requisição de informações de pagamento",
             "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Mensagens sobre pagamentos": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request2": {
-      "ai_tool": [
-        [
-          {
-            "node": "Message a model5",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Message a model5": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat6",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If1": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat7",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Respond to Chat4",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Respond to Chat7": {
-      "main": [
-        [
-          {
-            "node": "Message a model1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Respond to Chat4": {
-      "main": [
-        [
-          {
-            "node": "Message a model7",
-            "type": "main",
             "index": 0
           }
         ]
@@ -1669,26 +1418,8 @@
       "ai_memory": [
         [
           {
-            "node": "When chat message received",
+            "node": "Trigger: recebe mensagem",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Chat Memory Manager2",
-            "type": "main",
             "index": 0
           }
         ]
@@ -1698,57 +1429,13 @@
       "ai_memory": [
         [
           {
-            "node": "Respond to Chat2",
+            "node": "Pergunta e-mail",
             "type": "ai_memory",
             "index": 0
           },
           {
-            "node": "Chat Memory Manager",
+            "node": "Grava nome, email e id na memória",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Chat Memory Manager": {
-      "main": [
-        [
-          {
-            "node": "Chat Memory Manager2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Chat Memory Manager1": {
-      "main": [
-        [
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "Chat Memory Manager",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Chat Memory Manager2": {
-      "main": [
-        [
-          {
-            "node": "Switch",
-            "type": "main",
             "index": 0
           }
         ]
@@ -1758,7 +1445,7 @@
       "ai_memory": [
         [
           {
-            "node": "Chat Memory Manager2",
+            "node": "Resgata mensganes da memória",
             "type": "ai_memory",
             "index": 0
           }
@@ -1769,7 +1456,7 @@
       "ai_memory": [
         [
           {
-            "node": "Chat Memory Manager1",
+            "node": "Faz contagem do número de mensagens na memória",
             "type": "ai_memory",
             "index": 0
           }
@@ -1780,48 +1467,8 @@
       "ai_tool": [
         [
           {
-            "node": "Message a model3",
+            "node": "Consulta horários já agendados do usuário",
             "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Message a model3": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat8",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Respond to Chat8": {
-      "main": [
-        [
-          {
-            "node": "Switch2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch2": {
-      "main": [
-        [
-          {
-            "node": "Message a model4",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Respond to Chat9",
-            "type": "main",
             "index": 0
           }
         ]
@@ -1831,86 +1478,439 @@
       "ai_tool": [
         [
           {
-            "node": "Message a model4",
+            "node": "Faz a requisição do cancelamento do horário",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "Message a model4": {
+    "Trigger: recebe mensagem": {
       "main": [
         [
           {
-            "node": "If3",
+            "node": "If: contém audio",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If3": {
+    "If: contém audio": {
       "main": [
         [
           {
-            "node": "Respond to Chat10",
+            "node": "Transcreve o audio",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Respond to Chat11",
+            "node": "Merge",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
     },
-    "Respond to Chat10": {
+    "Transcreve o audio": {
       "main": [
         [
           {
-            "node": "Message a model3",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Respond to Chat11": {
+    "Extrai o resultado da função": {
       "main": [
         [
           {
-            "node": "Message a model6",
+            "node": "Faz contagem do número de mensagens na memória",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send a message": {
+    "Faz contagem do número de mensagens na memória": {
+      "main": [
+        [
+          {
+            "node": "If: verificia se há mensagens na memória",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If: verificia se há mensagens na memória": {
+      "main": [
+        [
+          {
+            "node": "Pergunta nome completo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Resgata mensganes da memória",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pergunta nome completo": {
+      "main": [
+        [
+          {
+            "node": "Pergunta e-mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pergunta e-mail": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request: consulta se há cadastro e faz cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request: consulta se há cadastro e faz cadastro": {
+      "main": [
+        [
+          {
+            "node": "Seleciona o ID do usuário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seleciona o ID do usuário": {
+      "main": [
+        [
+          {
+            "node": "Grava nome, email e id na memória",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grava nome, email e id na memória": {
+      "main": [
+        [
+          {
+            "node": "Resgata mensganes da memória",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resgata mensganes da memória": {
+      "main": [
+        [
+          {
+            "node": "Fluxo segue conforme intenção do usuário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fluxo segue conforme intenção do usuário": {
+      "main": [
+        [
+          {
+            "node": "Consulta horários disponíveis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Requisição de informações de pagamento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Consulta horários já agendados do usuário",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Consulta slots de horário disponível",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta horários disponíveis": {
+      "main": [
+        [
+          {
+            "node": "Mostra horários disponíveis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mostra horários disponíveis": {
+      "main": [
+        [
+          {
+            "node": "Verifica se usuário pediu para sair",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica se usuário pediu para sair": {
+      "main": [
+        [
+          {
+            "node": "Agenda o horário para o usuário",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirma que o usuário finalizou a sessão1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agenda o horário para o usuário": {
+      "main": [
+        [
+          {
+            "node": "If: Verifica se retornou erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If: Verifica se retornou erro": {
+      "main": [
+        [
+          {
+            "node": "Retorna devido opção incorreta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cofirma agendamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cofirma agendamento": {
+      "main": [
+        [
+          {
+            "node": "Trnaforma em HTML para e-mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trnaforma em HTML para e-mail": {
+      "main": [
+        [
+          {
+            "node": "Envia e-mail de agendamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retorna devido opção incorreta": {
+      "main": [
+        [
+          {
+            "node": "Consulta horários disponíveis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Requisição de informações de pagamento": {
+      "main": [
+        [
+          {
+            "node": "Retorna informações de pagamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta horários já agendados do usuário": {
+      "main": [
+        [
+          {
+            "node": "Mostra a agenda do usuário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mostra a agenda do usuário": {
+      "main": [
+        [
+          {
+            "node": "Verifica se o usuário pediu para sair",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica se o usuário pediu para sair": {
+      "main": [
+        [
+          {
+            "node": "Faz a requisição do cancelamento do horário",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirma que o usuário finalizou a sessão",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Faz a requisição do cancelamento do horário": {
+      "main": [
+        [
+          {
+            "node": "If: Verifica se ocorreu erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If: Verifica se ocorreu erro": {
+      "main": [
+        [
+          {
+            "node": "Retorna se ocorreu erro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirma o cancelamento do horário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirma o cancelamento do horário": {
+      "main": [
+        [
+          {
+            "node": "Transforma em HTML para e-mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transforma em HTML para e-mail": {
+      "main": [
+        [
+          {
+            "node": "Envia e-mail de cancelamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envia e-mail de cancelamento": {
       "main": [
         []
       ]
     },
-    "Message a model6": {
+    "Retorna se ocorreu erro": {
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Consulta horários já agendados do usuário",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Message a model7": {
+    "Consulta slots de horário disponível": {
       "main": [
         [
           {
-            "node": "Send a message1",
+            "node": "Retorna para o usuário os horários disponíveis",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP consulta de horários": {
+      "ai_tool": [
+        [
+          {
+            "node": "Consulta slots de horário disponível",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Requisição de horários disponíveis": {
+      "ai_tool": [
+        [
+          {
+            "node": "Consulta horários disponíveis",
+            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -1921,7 +1921,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "af6b514a-a7c6-40b4-bc9c-a762081415d2",
+  "versionId": "32567bf4-afc1-46c5-af1b-6398c0279255",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d6fac3e8e577062a0df339c7458fc445e3e3d4ebdf0b6c19cc98df414e2258c1"
